@@ -2,35 +2,363 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
-    <title>Escaneos</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../css/styles.css">
+    <title>Escaneos OMR</title>
+
+    <!-- BOOTSTRAP -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+    href="../css/styles.css">
+
+    <style>
+
+        .upload-box{
+
+            background:white;
+            padding:30px;
+            border-radius:20px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.08);
+            margin-bottom:25px;
+
+        }
+
+        .preview-image{
+
+            width:100%;
+            border-radius:20px;
+            box-shadow:0 10px 20px rgba(0,0,0,0.1);
+
+        }
+
+        .omr-sheet{
+
+            background:white;
+            border-radius:20px;
+            padding:30px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.08);
+            max-height:750px;
+            overflow-y:auto;
+
+        }
+
+        .question{
+
+            display:flex;
+            align-items:center;
+            gap:12px;
+            margin-bottom:14px;
+
+        }
+
+        .bubble{
+
+            width:35px;
+            height:35px;
+            border-radius:50%;
+            border:2px solid #2563eb;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            cursor:pointer;
+            transition:0.3s;
+            font-weight:600;
+
+        }
+
+        .bubble:hover{
+
+            background:#dbeafe;
+
+        }
+
+        .selected{
+
+            background:#2563eb;
+            color:white;
+
+        }
+
+        .digital-box{
+
+            background:white;
+            border-radius:20px;
+            padding:25px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+        }
+
+        .respuesta-item{
+
+            padding:12px;
+            border-bottom:1px solid #e2e8f0;
+
+        }
+
+        .estado-ok{
+
+            color:#10b981;
+            font-weight:700;
+
+        }
+
+        .estado-pendiente{
+
+            color:#f59e0b;
+            font-weight:700;
+
+        }
+
+    </style>
+
 </head>
 
 <body>
 
 <div class="main-container">
 
+    <!-- SIDEBAR -->
+
     <aside class="sidebar">
+
         <div class="logo">
             <h2>OMR SYSTEM</h2>
         </div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="cursos.html">
+                    <i class="fa-solid fa-book"></i>
+                    Cursos
+                </a>
+            </li>
+
+            <li>
+                <a href="preguntas.html">
+                    <i class="fa-solid fa-circle-question"></i>
+                    Preguntas
+                </a>
+            </li>
+
+            <li>
+                <a href="respuestas.html">
+                    <i class="fa-solid fa-square-check"></i>
+                    Respuestas
+                </a>
+            </li>
+
+            <li>
+                <a href="escaneos.html" class="active">
+                    <i class="fa-solid fa-file-import"></i>
+                    Escaneos
+                </a>
+            </li>
+
+            <li>
+                <a href="resultados.html">
+                    <i class="fa-solid fa-file-lines"></i>
+                    Resultados
+                </a>
+            </li>
+
+            <li>
+                <a href="ranking.html">
+                    <i class="fa-solid fa-ranking-star"></i>
+                    Ranking
+                </a>
+            </li>
+
+            <li>
+                <a href="../login.html">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Cerrar Sesión
+                </a>
+            </li>
+
+        </ul>
+
     </aside>
+
+    <!-- CONTENT -->
 
     <main class="content">
 
-        <h1>Escaneos</h1>
+        <!-- TOPBAR -->
 
-        <div class="box">
+        <div class="topbar">
 
-            <input type="file" class="form-control mb-3">
+            <h1>Escaneos OMR</h1>
 
-            <button class="btn btn-success">
-                Procesar Escaneo
-            </button>
+            <div class="admin-box">
+
+                <i class="fa-solid fa-user-shield"></i>
+                Administrador
+
+            </div>
+
+        </div>
+
+        <!-- SUBIR ARCHIVO -->
+
+        <div class="upload-box">
+
+            <div class="row">
+
+                <div class="col-md-8">
+
+                    <input type="file"
+                    class="form-control"
+                    id="inputArchivo"
+                    accept="image/*">
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <button class="btn btn-primary w-100"
+                    onclick="procesarOMR()">
+
+                        <i class="fa-solid fa-microchip"></i>
+                        Procesar Escaneo
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- INFORMACIÓN DETECTADA -->
+
+        <div class="cards-container">
+
+            <div class="card-box">
+
+                <h3 id="dniAlumno">
+                    --------
+                </h3>
+
+                <p>DNI Detectado</p>
+
+            </div>
+
+            <div class="card-box">
+
+                <h3 id="nombreAlumno">
+                    --------
+                </h3>
+
+                <p>Alumno Detectado</p>
+
+            </div>
+
+            <div class="card-box">
+
+                <h3 id="carreraAlumno">
+                    --------
+                </h3>
+
+                <p>Carrera</p>
+
+            </div>
+
+            <div class="card-box">
+
+                <h3 class="estado-ok"
+                id="estadoOMR">
+
+                    Pendiente
+
+                </h3>
+
+                <p>Estado Procesamiento</p>
+
+            </div>
+
+        </div>
+
+        <!-- PREVIEW -->
+
+        <div class="box mt-4">
+
+            <h4 class="mb-4">
+
+                Hoja Escaneada
+
+            </h4>
+
+            <img
+            id="preview"
+            class="preview-image"
+            src="https://placehold.co/900x1200?text=Vista+OMR"
+            alt="preview">
+
+        </div>
+
+        <!-- VISTA DIGITAL -->
+
+        <div class="box mt-4">
+
+            <h4 class="mb-4">
+
+                Vista Digital OMR
+
+            </h4>
+
+            <div class="omr-sheet"
+            id="omrContainer">
+
+            </div>
+
+        </div>
+
+        <!-- RESPUESTAS -->
+
+        <div class="digital-box mt-4">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <h4>
+
+                    Respuestas Detectadas
+
+                </h4>
+
+                <button class="btn btn-success">
+
+                    <i class="fa-solid fa-file-pdf"></i>
+                    Exportar PDF
+
+                </button>
+
+            </div>
+
+            <div id="respuestasDigitales">
+
+            </div>
 
         </div>
 
@@ -38,5 +366,219 @@
 
 </div>
 
+<!-- JAVASCRIPT -->
+
+<script>
+
+    const omrContainer =
+    document.getElementById("omrContainer");
+
+    const respuestasDigitales =
+    document.getElementById("respuestasDigitales");
+
+    const respuestas = {};
+
+    // CREAR 100 PREGUNTAS
+
+    for(let i = 1; i <= 100; i++){
+
+        let fila = document.createElement("div");
+
+        fila.className = "question";
+
+        fila.innerHTML = `
+
+            <strong style="width:50px;">
+                ${i}.
+            </strong>
+
+            <div class="bubble"
+            data-question="${i}"
+            data-answer="A">
+
+                A
+
+            </div>
+
+            <div class="bubble"
+            data-question="${i}"
+            data-answer="B">
+
+                B
+
+            </div>
+
+            <div class="bubble"
+            data-question="${i}"
+            data-answer="C">
+
+                C
+
+            </div>
+
+            <div class="bubble"
+            data-question="${i}"
+            data-answer="D">
+
+                D
+
+            </div>
+
+        `;
+
+        omrContainer.appendChild(fila);
+
+    }
+
+    // CLICK BURBUJAS
+
+    document.addEventListener("click", function(e){
+
+        if(e.target.classList.contains("bubble")){
+
+            let fila =
+            e.target.parentElement;
+
+            fila.querySelectorAll(".bubble")
+            .forEach(b => {
+
+                b.classList.remove("selected");
+
+            });
+
+            e.target.classList.add("selected");
+
+            let pregunta =
+            e.target.dataset.question;
+
+            let respuesta =
+            e.target.dataset.answer;
+
+            respuestas[pregunta] = respuesta;
+
+            renderRespuestas();
+
+        }
+
+    });
+
+    // RENDER RESPUESTAS
+
+    function renderRespuestas(){
+
+        respuestasDigitales.innerHTML = "";
+
+        for(let pregunta in respuestas){
+
+            respuestasDigitales.innerHTML += `
+
+                <div class="respuesta-item">
+
+                    Pregunta ${pregunta}
+                    → Respuesta:
+
+                    <strong>
+                        ${respuestas[pregunta]}
+                    </strong>
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+    // PREVIEW IMAGEN
+
+    document.getElementById("inputArchivo")
+    .addEventListener("change", function(e){
+
+        let archivo = e.target.files[0];
+
+        if(archivo){
+
+            let reader = new FileReader();
+
+            reader.onload = function(ev){
+
+                document.getElementById("preview")
+                .src = ev.target.result;
+
+            }
+
+            reader.readAsDataURL(archivo);
+
+        }
+
+    });
+
+    // PROCESAR OMR
+
+    function procesarOMR(){
+
+        // SIMULACIÓN FRONTEND
+
+        document.getElementById("dniAlumno")
+        .innerText = "74211528";
+
+        document.getElementById("nombreAlumno")
+        .innerText = "Carlos Ramos";
+
+        document.getElementById("carreraAlumno")
+        .innerText = "Medicina";
+
+        document.getElementById("estadoOMR")
+        .innerText = "Procesado";
+
+        document.getElementById("estadoOMR")
+        .classList.remove("estado-pendiente");
+
+        // RESPUESTAS AUTOMÁTICAS SIMULADAS
+
+        let respuestasAuto = {
+
+            1:"A",
+            2:"B",
+            3:"C",
+            4:"D",
+            5:"A",
+            6:"B",
+            7:"C",
+            8:"D",
+            9:"A",
+            10:"B"
+
+        };
+
+        for(let pregunta in respuestasAuto){
+
+            let respuesta =
+            respuestasAuto[pregunta];
+
+            let bubble =
+            document.querySelector(
+
+                `.bubble[data-question="${pregunta}"][data-answer="${respuesta}"]`
+
+            );
+
+            if(bubble){
+
+                bubble.click();
+
+            }
+
+        }
+
+        alert(
+            "Escaneo procesado correctamente."
+        );
+
+    }
+
+</script>
+
 </body>
+
 </html>

@@ -2,17 +2,31 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Cursos</title>
+
+    <!-- BOOTSTRAP -->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- FONT AWESOME -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+
     <link rel="stylesheet" href="../css/styles.css">
+
 </head>
 
 <body>
 
 <div class="main-container">
+
+    <!-- SIDEBAR -->
 
     <aside class="sidebar">
 
@@ -21,27 +35,331 @@
         </div>
 
         <ul class="menu">
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="cursos.html" class="active">Cursos</a></li>
-            <li><a href="preguntas.html">Preguntas</a></li>
-            <li><a href="respuestas.html">Respuestas</a></li>
-            <li><a href="escaneos.html">Escaneos</a></li>
-            <li><a href="resultados.html">Resultados</a></li>
-            <li><a href="ranking.html">Ranking</a></li>
+
+            <li>
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="cursos.html" class="active">
+                    <i class="fa-solid fa-book"></i>
+                    Cursos
+                </a>
+            </li>
+
+            <li>
+                <a href="preguntas.html">
+                    <i class="fa-solid fa-circle-question"></i>
+                    Preguntas
+                </a>
+            </li>
+
+            <li>
+                <a href="respuestas.html">
+                    <i class="fa-solid fa-square-check"></i>
+                    Respuestas
+                </a>
+            </li>
+
+            <li>
+                <a href="escaneos.html">
+                    <i class="fa-solid fa-file-import"></i>
+                    Escaneos
+                </a>
+            </li>
+
+            <li>
+                <a href="resultados.html">
+                    <i class="fa-solid fa-file-lines"></i>
+                    Resultados
+                </a>
+            </li>
+
+            <li>
+                <a href="ranking.html">
+                    <i class="fa-solid fa-ranking-star"></i>
+                    Ranking
+                </a>
+            </li>
+
+            <li>
+                <a href="../login.html">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Cerrar Sesión
+                </a>
+            </li>
+
         </ul>
 
     </aside>
 
+    <!-- CONTENT -->
+
     <main class="content">
 
-        <h1>Gestión de Cursos</h1>
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+            <h1>Configuración de Cursos</h1>
+
+            <div class="admin-box">
+
+                <i class="fa-solid fa-user-shield"></i>
+                Administrador
+
+            </div>
+
+        </div>
+
+        <!-- ÁREA -->
 
         <div class="box">
 
-            <input type="text" class="form-control mb-3" placeholder="Nombre del curso">
+            <h4 class="mb-4">
+                Seleccionar Área Profesional
+            </h4>
 
-            <button class="btn btn-primary">
-                Guardar Curso
+            <select class="form-select">
+
+                <option>
+                    Medicina
+                </option>
+
+                <option>
+                    Ingenierías
+                </option>
+
+                <option>
+                    Letras
+                </option>
+
+                <option>
+                    Derecho
+                </option>
+
+                <option>
+                    Administración
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- TABLA -->
+
+        <div class="box">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <h4>
+                    Distribución de Preguntas
+                </h4>
+
+                <button class="btn btn-primary"
+                onclick="agregarCurso()">
+
+                    <i class="fa-solid fa-plus"></i>
+                    Agregar Curso
+
+                </button>
+
+            </div>
+
+            <table class="table table-hover align-middle">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Curso
+                        </th>
+
+                        <th>
+                            Preguntas
+                        </th>
+
+                        <th>
+                            Puntaje Correcta
+                        </th>
+
+                        <th>
+                            Puntaje Incorrecta
+                        </th>
+
+                        <th>
+                            Acciones
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaCursos">
+
+                    <tr>
+
+                        <td>
+                            Biología
+                        </td>
+
+                        <td>
+                            20
+                        </td>
+
+                        <td>
+                            +20
+                        </td>
+
+                        <td>
+                            -1.125
+                        </td>
+
+                        <td>
+
+                            <button class="btn btn-success btn-sm"
+                            onclick="editarCurso(this)">
+
+                                <i class="fa-solid fa-pen"></i>
+
+                            </button>
+
+                            <button class="btn btn-danger btn-sm"
+                            onclick="eliminarCurso(this)">
+
+                                <i class="fa-solid fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>
+                            Química
+                        </td>
+
+                        <td>
+                            20
+                        </td>
+
+                        <td>
+                            +20
+                        </td>
+
+                        <td>
+                            -1.125
+                        </td>
+
+                        <td>
+
+                            <button class="btn btn-success btn-sm"
+                            onclick="editarCurso(this)">
+
+                                <i class="fa-solid fa-pen"></i>
+
+                            </button>
+
+                            <button class="btn btn-danger btn-sm"
+                            onclick="eliminarCurso(this)">
+
+                                <i class="fa-solid fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>
+                            Matemática
+                        </td>
+
+                        <td>
+                            15
+                        </td>
+
+                        <td>
+                            +20
+                        </td>
+
+                        <td>
+                            -1.125
+                        </td>
+
+                        <td>
+
+                            <button class="btn btn-success btn-sm"
+                            onclick="editarCurso(this)">
+
+                                <i class="fa-solid fa-pen"></i>
+
+                            </button>
+
+                            <button class="btn btn-danger btn-sm"
+                            onclick="eliminarCurso(this)">
+
+                                <i class="fa-solid fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- RESUMEN -->
+
+        <div class="cards-container">
+
+            <div class="card-box">
+
+                <h3>100</h3>
+
+                <p>Total Preguntas</p>
+
+            </div>
+
+            <div class="card-box">
+
+                <h3>2000</h3>
+
+                <p>Puntaje Máximo</p>
+
+            </div>
+
+            <div class="card-box">
+
+                <h3>Medicina</h3>
+
+                <p>Área Seleccionada</p>
+
+            </div>
+
+        </div>
+
+        <!-- BOTÓN -->
+
+        <div class="box text-end">
+
+            <button class="btn btn-primary btn-lg">
+
+                <i class="fa-solid fa-floppy-disk"></i>
+                Guardar Configuración
+
             </button>
 
         </div>
@@ -50,5 +368,107 @@
 
 </div>
 
+<!-- JAVASCRIPT -->
+
+<script>
+
+    // AGREGAR CURSO
+
+    function agregarCurso(){
+
+        let curso = prompt("Ingrese el nombre del curso:");
+
+        let preguntas = prompt("Ingrese cantidad de preguntas:");
+
+        if(curso && preguntas){
+
+            let tabla = document.getElementById("tablaCursos");
+
+            let fila = tabla.insertRow();
+
+            fila.innerHTML = `
+
+                <td>${curso}</td>
+
+                <td>${preguntas}</td>
+
+                <td>+20</td>
+
+                <td>-1.125</td>
+
+                <td>
+
+                    <button class="btn btn-success btn-sm"
+                    onclick="editarCurso(this)">
+
+                        <i class="fa-solid fa-pen"></i>
+
+                    </button>
+
+                    <button class="btn btn-danger btn-sm"
+                    onclick="eliminarCurso(this)">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                    </button>
+
+                </td>
+
+            `;
+
+        }
+
+    }
+
+    // EDITAR
+
+    function editarCurso(boton){
+
+        let fila = boton.parentElement.parentElement;
+
+        let curso = fila.cells[0];
+        let preguntas = fila.cells[1];
+
+        let nuevoCurso = prompt(
+            "Editar curso:",
+            curso.innerText
+        );
+
+        let nuevasPreguntas = prompt(
+            "Editar preguntas:",
+            preguntas.innerText
+        );
+
+        if(nuevoCurso && nuevasPreguntas){
+
+            curso.innerText = nuevoCurso;
+
+            preguntas.innerText = nuevasPreguntas;
+
+        }
+
+    }
+
+    // ELIMINAR
+
+    function eliminarCurso(boton){
+
+        let fila = boton.parentElement.parentElement;
+
+        let confirmar = confirm(
+            "¿Desea eliminar este curso?"
+        );
+
+        if(confirmar){
+
+            fila.remove();
+
+        }
+
+    }
+
+</script>
+
 </body>
+
 </html>

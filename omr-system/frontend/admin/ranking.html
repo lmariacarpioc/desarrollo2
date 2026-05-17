@@ -2,51 +2,430 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
-    <title>Ranking</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../css/styles.css">
+    <title>Ranking Oficial</title>
+
+    <!-- BOOTSTRAP -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+    href="../css/styles.css">
+
+    <style>
+
+        .ranking-card{
+
+            background:white;
+            border-radius:25px;
+            padding:30px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom:30px;
+
+        }
+
+        .pdf-preview{
+
+            width:100%;
+            height:500px;
+            object-fit:cover;
+            border-radius:20px;
+            border:3px solid #e2e8f0;
+
+        }
+
+        .top-card{
+
+            background:linear-gradient(135deg,#2563eb,#1e3a8a);
+            color:white;
+            border-radius:25px;
+            padding:30px;
+            margin-bottom:30px;
+            box-shadow:0 10px 30px rgba(37,99,235,0.3);
+
+        }
+
+        .badge-ingresante{
+
+            background:#10b981;
+            padding:8px 15px;
+            border-radius:30px;
+            font-size:14px;
+
+        }
+
+        .btn-download{
+
+            padding:14px 25px;
+            border-radius:15px;
+            font-weight:bold;
+
+        }
+
+        .career-card{
+
+            background:#f8fafc;
+            padding:20px;
+            border-radius:20px;
+            transition:0.3s;
+            cursor:pointer;
+
+        }
+
+        .career-card:hover{
+
+            transform:translateY(-5px);
+            background:#eff6ff;
+
+        }
+
+    </style>
+
 </head>
 
 <body>
 
 <div class="main-container">
 
+    <!-- SIDEBAR -->
+
     <aside class="sidebar">
+
         <div class="logo">
+
             <h2>OMR SYSTEM</h2>
+
         </div>
+
+        <ul class="menu">
+
+            <li>
+
+                <a href="dashboard.html">
+
+                    <i class="fa-solid fa-chart-line"></i>
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="cursos.html">
+
+                    <i class="fa-solid fa-book"></i>
+                    Cursos
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="preguntas.html">
+
+                    <i class="fa-solid fa-circle-question"></i>
+                    Preguntas
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="respuestas.html">
+
+                    <i class="fa-solid fa-square-check"></i>
+                    Respuestas
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="escaneos.html">
+
+                    <i class="fa-solid fa-file-import"></i>
+                    Escaneos
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="resultados.html">
+
+                    <i class="fa-solid fa-file-lines"></i>
+                    Resultados
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="ranking.html"
+                class="active">
+
+                    <i class="fa-solid fa-ranking-star"></i>
+                    Ranking
+
+                </a>
+
+            </li>
+
+        </ul>
+
     </aside>
+
+    <!-- CONTENT -->
 
     <main class="content">
 
-        <h1>Ranking</h1>
+        <!-- TOPBAR -->
 
-        <div class="box">
+        <div class="topbar">
 
-            <table class="table table-bordered">
+            <h1>
 
-                <tr>
-                    <th>Puesto</th>
-                    <th>Nombre</th>
-                    <th>Puntaje</th>
-                </tr>
+                Ranking Oficial
 
-                <tr>
-                    <td>1</td>
-                    <td>Laura Carpio</td>
-                    <td>420</td>
-                </tr>
+            </h1>
 
-            </table>
+            <div class="admin-box">
+
+                <i class="fa-solid fa-trophy"></i>
+                Publicación Oficial
+
+            </div>
 
         </div>
 
-    </main>
+        <!-- TOP CARD -->
+
+        <div class="top-card">
+
+            <div class="row align-items-center">
+
+                <div class="col-md-8">
+
+                    <h2 class="mb-3">
+
+                        Resultados Oficiales
+                        Proceso de Admisión 2026
+
+                    </h2>
+
+                    <p class="mb-4">
+
+                        Ranking general de postulantes e ingresantes
+                        de la Universidad Nacional San Luis Gonzaga.
+
+                    </p>
+
+                    <span class="badge-ingresante">
+
+                        Publicado Correctamente
+
+                    </span>
+
+                </div>
+
+                <div class="col-md-4 text-end">
+
+                    <button class="btn btn-light btn-download"
+                    onclick="descargarPDF()">
+
+                        <i class="fa-solid fa-file-pdf"></i>
+                        Descargar PDF
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PDF -->
+
+        <div class="ranking-card">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <h3>
+
+                    Vista Previa PDF
+
+                </h3>
+
+                <button class="btn btn-primary"
+                onclick="abrirPDF()">
+
+                    <i class="fa-solid fa-eye"></i>
+                    Ver Completo
+
+                </button>
+
+            </div>
+
+            <img
+            src="https://placehold.co/1200x1500?text=PDF+Resultados+Oficiales"
+            class="pdf-preview"
+            id="previewPDF">
+
+        </div>
+
+        <!-- DESCARGAS -->
+
+        <div class="ranking-card">
+
+            <h3 class="mb-4">
+
+                Descargar por Carrera
+
+            </h3>
+
+            <div class="row g-4">
+
+                <div class="col-md-4">
+
+                    <div class="career-card">
+
+                        <h5>
+
+                            Medicina
+
+                        </h5>
+
+                        <p>
+
+                            Ranking oficial Medicina Humana
+
+                        </p>
+
+                        <button class="btn btn-success w-100"
+                        onclick="descargarCarrera('Medicina')">
+
+                            <i class="fa-solid fa-download"></i>
+                            Descargar
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="career-card">
+
+                        <h5>
+
+                            Ingeniería
+
+                        </h5>
+
+                        <p>
+
+                            Ranking oficial Ingeniería
+
+                        </p>
+
+                        <button class="btn btn-success w-100"
+                        onclick="descargarCarrera('Ingeniería')">
+
+                            <i class="fa-solid fa-download"></i>
+                            Descargar
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="career-card">
+
+                        <h5>
+
+                            Derecho
+
+                        </h5>
+
+                        <p>
+
+                            Ranking oficial Derecho
+
+                        </p>
+
+                        <button class="btn btn-success w-100"
+                        onclick="descargarCarrera('Derecho')">
+
+                            <i class="fa-solid fa-download"></i>
+                            Descargar
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+       </main>
 
 </div>
 
+<!-- JS -->
+
+<script>
+
+    function descargarPDF(){
+
+        alert(
+            "Descargando ranking oficial PDF..."
+        );
+
+    }
+
+    function abrirPDF(){
+
+        alert(
+            "Abriendo vista completa del PDF..."
+        );
+
+    }
+
+    function descargarCarrera(carrera){
+
+        alert(
+            "Descargando ranking de " + carrera
+        );
+
+    }
+
+</script>
+
 </body>
+
 </html>
